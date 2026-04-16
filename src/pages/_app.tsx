@@ -1,6 +1,29 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
+// 루트 폴더 이므로 전체적으로 공통되는
+// 헤더 컴포넌트나 레이아웃 렌더링, 비즈니스 로직 작성
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const router = useRouter();
+  const onClickButton = () => {
+    router.push("/test");
+  };
+
+  return (
+    <>
+      <header>
+        <Link href="/">index</Link>
+        &nbsp;
+        <Link href="/search">search</Link>
+        &nbsp;
+        <Link href="/book/1">book/1</Link>
+        <div>
+          <button onClick={onClickButton}>/test 페이지 이동</button>
+        </div>
+      </header>
+      <Component {...pageProps} />
+    </>
+  );
 }
